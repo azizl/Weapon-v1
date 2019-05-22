@@ -4,8 +4,8 @@ Serial myPort;
 color tracingColor; 
 Capture video;
 void setup() {
-  size(640, 240);
-  String portName = Serial.list()[0]; 
+  size(640, 360);
+  String portName = Serial.list()[1]; 
    myPort = new Serial(this, portName, 9600);
   String[] cameras = Capture.list();
   printArray(cameras);
@@ -39,19 +39,21 @@ if (d < rec) {
         rec = d;
         closestX = x;
         closestY = y;
-        myPort.write('1');
+        
       }
-else {
-  myPort.write('0');
-}
-    }
+
   }
+}
 if (rec < 10) { 
     fill(tracingColor);
     strokeWeight(4.0);
     stroke(0);
+    myPort.write('1');
     ellipse(closestX, closestY, 16, 16);
   }
+else {
+  myPort.write('0');
+}
 }
 
 void mousePressed() {
